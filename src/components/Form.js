@@ -11,6 +11,7 @@ import { AddUser } from "../actions/action";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
+import toastr from "toastr";
 
 const styles = {
   form: {
@@ -110,6 +111,24 @@ class Form extends Component {
       });
     } else {
       this.props.AddUser(this.state.user);
+      toastr.options = {
+        closeButton: true,
+        debug: false,
+        newestOnTop: false,
+        progressBar: false,
+        positionClass: "toast-top-right",
+        preventDuplicates: false,
+        onclick: null,
+        showDuration: "100",
+        hideDuration: "100",
+        timeOut: "2000",
+        extendedTimeOut: "1000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "show",
+        hideMethod: "hide"
+      };
+      toastr.success("User was created");
     }
   }
   render() {

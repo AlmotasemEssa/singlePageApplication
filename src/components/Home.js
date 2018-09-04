@@ -3,6 +3,7 @@ import UserCard from "./UserCard";
 import AppToolbar from "./AppToolbar";
 import { connect } from "react-redux";
 import { ShowUsers } from "../actions/action";
+import toastr from "toastr";
 
 class Home extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class Home extends Component {
       users: filteredUsers
     });
     localStorage.setItem("usersList", JSON.stringify(filteredUsers));
+    toastr.info("User deleted");
   };
   render() {
     return (
