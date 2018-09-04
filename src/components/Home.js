@@ -16,6 +16,10 @@ class Home extends Component {
     const { users } = this.props;
     this.setState({ users });
   }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ users: nextProps.users });
+  }
   removeUser = id => {
     const filteredUsers = this.state.users.filter(el => el.id !== id);
     this.setState({
