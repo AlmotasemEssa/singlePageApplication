@@ -120,8 +120,7 @@ class Form extends Component<Props, State> {
       this.setState({
         errors: { ...this.state.errors, errorName: "errorName" }
       });
-    }
-    if (surname === "") {
+    } else if (surname === "") {
       this.setState({
         errors: { ...this.state.errors, errorSurname: "errorSurName" }
       });
