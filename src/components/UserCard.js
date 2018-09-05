@@ -1,11 +1,25 @@
+// @flow
+
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import ModalForm from "./ModalForm";
 
-class UserCard extends Component {
-  constructor(props) {
+type Props = {
+  name: string,
+  surname: string,
+  birthday: string,
+  gender: string,
+  student: string,
+  id: string,
+  removeUser: (id: string) => void
+};
+type State = {
+  open: boolean
+};
+class UserCard extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       open: false
@@ -14,12 +28,16 @@ class UserCard extends Component {
   handleOpen = () => {
     this.setState({ open: true });
   };
-  deleteUser(item) {
+  deleteUser(item: string) {
     this.props.removeUser(item);
   }
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  props: Props;
+  state: State;
+
   render() {
     const { name, surname, birthday, gender, student, id } = this.props;
     return (

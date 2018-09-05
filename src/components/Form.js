@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -12,7 +14,18 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import toastr from "toastr";
+import type { User, ErrorsType } from "../actions/types";
 
+type State = {
+  user: User,
+  errors: ErrorsType
+};
+
+type Props = {
+  AddUser: typeof AddUser,
+  history: Object,
+  classes: Object
+};
 const styles = {
   form: {
     width: "100%",
@@ -60,7 +73,7 @@ function guid() {
     s4()
   );
 }
-class Form extends Component {
+class Form extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -79,6 +92,9 @@ class Form extends Component {
       }
     };
   }
+
+  state: State;
+  props: Props;
   nextPath(path) {
     this.props.history.push(path);
   }

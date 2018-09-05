@@ -1,17 +1,31 @@
+// @flow
+
 import React, { Component } from "react";
 import UserCard from "./UserCard";
 import AppToolbar from "./AppToolbar";
 import { connect } from "react-redux";
 import { ShowUsers } from "../actions/action";
 import toastr from "toastr";
+import type { User } from "../actions/types";
 
-class Home extends Component {
+type State = {
+  users: Array<User>
+};
+
+type Props = {
+  ShowUsers: typeof ShowUsers,
+  users: Array<User>
+};
+class Home extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
       users: []
     };
   }
+
+  props: Props;
+  state: State;
   async componentWillMount() {
     await this.props.ShowUsers();
     const { users } = this.props;

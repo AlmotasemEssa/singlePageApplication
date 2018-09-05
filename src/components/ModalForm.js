@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import Radio from "@material-ui/core/Radio";
@@ -12,6 +14,7 @@ import { connect } from "react-redux";
 import { SaveUsers, ShowUsers } from "../actions/action";
 import { withStyles } from "@material-ui/core/styles";
 import Card from '@material-ui/core/Card';
+import type { User, ErrorsType } from "../actions/types";
 
 const styles = {
   name: {
@@ -38,7 +41,20 @@ const styles = {
   }
 };
 
-class ModalForm extends Component {
+type State = {
+  user: User,
+  errors: ErrorsType,
+  scroll: string
+};
+
+type Props = {
+  classes: Object,
+  users: Array<User>,
+  openModal: () => void,
+  closeModal: () => void,
+  SaveUsers: typeof SaveUsers
+}
+class ModalForm extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,6 +74,9 @@ class ModalForm extends Component {
       scroll: "paper"
     };
   }
+
+  props: Props;
+  state: State;
   handleChange = e => {
     if (e.target.name === "name") {
       this.setState({
@@ -94,7 +113,7 @@ class ModalForm extends Component {
       this.props.SaveUsers(resultedArray);
     }
   }
-  componentWillReceiveProps(nexProps) {
+  componentWillReceiveProps(nexProps: any) {
     const { id, name, surname, birthday, gender, student } = nexProps;
 
     this.setState({
@@ -115,7 +134,7 @@ class ModalForm extends Component {
     return (
       <Dialog
         open={openModal}
-        onClose={this.handleClose}
+        onClose={() => this.props.closeModal()}
         scroll={this.state.scroll}
         aria-labelledby="scroll-dialog-title"
       >

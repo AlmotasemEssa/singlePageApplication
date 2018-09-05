@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -19,7 +21,7 @@ const styles = {
     marginRight: "20px"
   }
 };
-class AppToolbar extends Component {
+class AppToolbar extends Component<any> {
   nextPath(path) {
     this.props.history.push(path);
   }
